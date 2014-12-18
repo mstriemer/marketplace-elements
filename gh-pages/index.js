@@ -1,6 +1,10 @@
 (function () {
     var elements = [];
 
+    // Currently I'm just passing the config in but in a perfect world it would
+    // be nice to have this be auto-generated from documentation in the
+    // element's own file.
+
     elements.push({
         name: "mkt-banner",
         template: getTemplate("mkt-banner-template"),
