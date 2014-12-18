@@ -11,7 +11,7 @@
 }
 .mkt-banner-content {
   margin: 2px auto;
-  max-width: 1024px;
+  max-width: $max-site-width;
   position: relative;
   text-align: center;
 }
@@ -41,16 +41,6 @@
   position: relative;
 }
 .mkt-banner-content a.spin:after {
-  -webkit-animation: 0.9s spin infinite steps(30);
-  animation: 0.9s spin infinite steps(30);
-  height: 30px;
-  margin: 0 auto;
-  background: url("../img/btn_spinner.png") no-repeat center;
-  width: 30px;
-  height: 18px;
-  margin: 2px 0;
-  background: url("../img/btn_spinner_18.png") no-repeat center;
-  width: 18px;
   content: "";
   display: block;
   left: calc(50% - 9px);
@@ -161,7 +151,7 @@
     padding: 0;
   }
 }
-@media (max-width: 709px) {
+@media $narrower-than-desktop {
   .mkt-banner small {
     display: none;
   }

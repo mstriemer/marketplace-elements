@@ -5,73 +5,66 @@
     <link rel="stylesheet" href="gh-pages/page.css">
     <link rel="stylesheet" href="dist/css/marketplace-elements.css">
     <script src="gh-pages/document-register-element.js"></script>
+    <script src="gh-pages/mustache.js"></script>
     <script src="dist/js/marketplace-elements.js"></script>
   </head>
   <body>
-    <div class="page">
-      <!--Nav-->
-      <mkt-tab-control control="element-tabs" id="elements-tab-control">
+    <script id="element-listing" type="text/mustache">
+      <mkt-tab-control class="elements" control="element-tabs"  id="elements-tab-control">
         <select>
-          <option value="mkt-banner">Banner</option>
-          <option value="mkt-segmented">Segmented</option>
-          <option value="mkt-tab-control">Tab Control</option>
+          {{#elements}}
+            <option value="{{name}}">{{name}}</option>
+          {{/elements}}
         </select>
       </mkt-tab-control>
-      <hr>
-
+    </script>
+    <script id="element-detail" type="text/mustache">
+      <div class="element-detail">
+        <h3>{{name}}</h3>
+        <p>{{description}}</p>
+        {{{template}}}
+      </div>
+    </script>
+    <script id="element-detail-tabs" type="text/mustache">
       <mkt-tabs id="element-tabs">
-        <!--Banner-->
-        <section name="mkt-banner">
-          <mkt-banner success dismiss="off">Marketplace Elements
-            <a href="https://github.com/mozilla/marketplace-elements">Code on GitHub</a>
-          </mkt-banner>
+        {{#elements}}
+          <section name="{{name}}">
+            <div class="element-detail">
+              <p>{{description}}</p>
+              {{{template}}}
+            </div>
 <pre>
-  &lt;mkt-banner success dismiss="off"&gt;Marketplace Elements
-    &lt;a href="https://github.com/mozilla/marketplace-elements"&gt;Code on GitHub&lt;/a&gt;
-  &lt;/mkt-banner&gt;
+  {{template}}
 </pre>
-        </section>
-
-        <!--Segmented-->
-        <section name="mkt-segmented">
-          <mkt-segmented>
-            <select>
-              <option value="en">English</option>
-              <option value="wat">Whatever</option>
-              <option value="all" selected>All languages</option>
-            </select>
-          </mkt-segmented>
-<pre>
-  &lt;mkt-segmented&gt;
-    &lt;select&gt;
-      &lt;option value="en"&gt;English&lt;/option&gt;
-      &lt;option value="wat"&gt;Whatever&lt;/option&gt;
-      &lt;option value="all" selected&gt;All languages&lt;/option&gt;
-    &lt;/select&gt;
-  &lt;/mkt-segmented&gt;
-</pre>
-        </section>
-
-        <!--Tab Control-->
-        <section name="mkt-tab-control">
-          <mkt-tab-control>
-            <select>
-              <option value="en">English</option>
-              <option value="wat">Whatever</option>
-              <option value="all" selected>All languages</option>
-            </select>
-          </mkt-tab-control>
-<pre>
-  &lt;mkt-tab-control&gt;
-    &lt;select&gt;
-      &lt;option value="en"&gt;English&lt;/option&gt;
-      &lt;option value="wat"&gt;Whatever&lt;/option&gt;
-      &lt;option value="all" selected&gt;All languages&lt;/option&gt;
-    &lt;/select&gt;
-  &lt;/mkt-tab-control&gt;
-</pre>
-        </section>
+          </section>
+        {{/elements}}
       </mkt-tabs>
-    </div>
+    </script>
+    <script id="mkt-banner-template" type="text/mustache">
+      <mkt-banner>
+        Hey, read this!
+        <a href='#'>Do this.</a>
+        <small>Hidden on narrow screens.</small>
+      </mkt-banner>
+    </script>
+    <script id="mkt-segmented-template" type="text/mustache">
+      <mkt-segmented>
+        <select>
+          <option value="en">English</option>
+          <option value="wat">Whatever</option>
+          <option value="all" selected>All languages</option>
+        </select>
+      </mkt-segmented>
+    </script>
+    <script id="mkt-tab-control-template" type="text/mustache">
+      <mkt-tab-control>
+        <select>
+          <option value="home">Home</option>
+          <option value="about">About</option>
+          <option value="contact">Contact</option>
+        </select>
+      </mkt-tab-control>
+    </script>
+    <script src="gh-pages/index.js"></script>
   </body>
 </html>
