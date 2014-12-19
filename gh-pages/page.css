@@ -26,12 +26,4 @@ pre {
     color: #fff;
     font-family: monospace;
     padding-bottom: 10px;
-    margin-top: 80px;
-}
-pre:before {
-    color: #000;
-    content: 'Source';
-    display: block;
-    position: relative;
-    bottom: 30px;
 }
