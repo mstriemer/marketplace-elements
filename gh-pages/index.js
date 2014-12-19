@@ -8,15 +8,21 @@
     elements.push({
         name: "mkt-banner",
         template: getTemplate("mkt-banner-template"),
-        attributes: {
-            success: {
-                description: "Make it successful.",
+        attributes: [
+            {
+                name: "success",
+                description: "Make it look successful.",
             },
-            dismiss: {
+            {
+                name: "compat",
+                description: "Make it look firefox-y.",
+            },
+            {
+                name: "dismiss",
+                description: "Handle the dismiss button.",
                 options: ["on", "off", "remember"],
-                description: "Handle the dismiss button."
             },
-        },
+        ],
     });
 
     elements.push({
@@ -57,4 +63,24 @@
             elementDetail: getTemplate('element-detail'),
         }),
     ].join("\n");
+
+    document
+        .getElementById('element-tabs')
+        .addEventListener('change', function (e) {
+            var input = e.target;
+            var attributeOptions = input.closest('.attribute-options');
+            if (attributeOptions) {
+                var elementSection = input.closest('section');
+                var element = elementSection.querySelector(elementSection.getAttribute('name'));
+                if (input.type == 'checkbox') {
+                    if (input.checked) {
+                        element.setAttribute(input.name, '');
+                    } else {
+                        element.removeAttribute(input.name);
+                    }
+                } else {
+                    element.setAttribute(input.name, input.value);
+                }
+            }
+        });
 })();

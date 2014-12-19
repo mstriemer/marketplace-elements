@@ -74,6 +74,14 @@
             }
         }
     }
+
+    a {
+        background-color: $darker-gray;
+
+        &:hover {
+            background-color: darken($darker-gray, 10%);
+        }
+    }
 }
 
 .mkt-banner-firefox {
@@ -83,14 +91,6 @@
         background-size: 64px 60px;
         min-height: 60px;
         padding: 0 40px 0 70px;
-    }
-
-    a {
-        background-color: $darker-gray;
-
-        &:hover {
-            background-color: darken($darker-gray, 10%);
-        }
     }
 }
 

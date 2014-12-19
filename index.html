@@ -33,6 +33,29 @@
               <p>{{description}}</p>
               {{{template}}}
             </div>
+
+            <h4>Attributes</h4>
+            {{#attributes}}
+              <div class="attribute-options">
+                {{^options}}
+                  <label>
+                    <input type="checkbox" name="{{name}}">
+                    {{name}}{{#description}} - {{.}}{{/description}}
+                  </label>
+                {{/options}}
+                {{#options}}
+                  <label>
+                    <input type="radio" name="{{name}}" value={{.}}>
+                    {{.}}
+                  </label>
+                {{/options}}
+              </div>
+            {{/attributes}}
+            {{^attributes}}
+            <p>None.</p>
+            {{/attributes}}
+
+            <h4>Source</h4>
 <pre>
   {{template}}
 </pre>
@@ -41,7 +64,7 @@
       </mkt-tabs>
     </script>
     <script id="mkt-banner-template" type="text/mustache">
-      <mkt-banner>
+      <mkt-banner id="mkt-banner-demo">
         Hey, read this!
         <a href='#'>Do this.</a>
         <small>Hidden on narrow screens.</small>

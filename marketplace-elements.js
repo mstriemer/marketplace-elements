@@ -26,10 +26,12 @@
                 // Handle setting classes based on attributeClasses.
                 if (this.attributeClasses.hasOwnProperty(name)) {
                     var className = this.attributeClasses[name];
-                    if (value === null) {
-                        this.classList.remove(className);
-                    } else {
-                        this.classList.add(className);
+                    if (className) {
+                        if (value === null) {
+                            this.classList.remove(className);
+                        } else {
+                            this.classList.add(className);
+                        }
                     }
                 }
             },
@@ -64,8 +66,20 @@
 
     var MktBanner = document.registerElement('mkt-banner', {
         prototype: Object.create(MktHTMLElement.prototype, {
+            attributeChangedCallback: {
+                value: function (name, previousValue, value) {
+                    MktHTMLElement
+                        .prototype
+                        .attributeChangedCallback
+                        .apply(this, arguments);
+                    if (name == 'dismiss') {
+                        this.setDismissButton();
+                    }
+                },
+            },
             attributeClasses: {
                 value: {
+                    compat: 'mkt-banner-firefox',
                     success: 'mkt-banner-success',
                     dismiss: null,
                 },
@@ -74,11 +88,6 @@
                 value: function () {
                     MktHTMLElement.prototype.createdCallback.call(this);
                     this.classList.add('mkt-banner');
-
-                    // This is a Firefox banner if it isn't a success banner.
-                    if (!this.success) {
-                        this.classList.add('mkt-banner-firefox');
-                    }
 
                     if (this.rememberDismissal && this.dismissed) {
                         this.dismissBanner();
@@ -92,25 +101,14 @@
                 value: function (html) {
                     var self = this;
 
-                    var content = document.createElement('div');
-                    content.classList.add('mkt-banner-content');
-                    content.innerHTML = html;
+                    this.content = document.createElement('div');
+                    this.content.classList.add('mkt-banner-content');
+                    this.content.innerHTML = html;
 
-                    if (!this.undismissable) {
-                        var closeButton = document.createElement('a');
-                        closeButton.classList.add('mkt-banner-close');
-                        closeButton.href = '#';
-                        closeButton.innerHTML = '&times;';
-                        closeButton.title = gettext('Close');
-                        closeButton.addEventListener('click', function (e) {
-                            e.preventDefault();
-                            self.dismissBanner();
-                        });
-                        content.appendChild(closeButton);
-                    }
+                    this.setDismissButton();
 
                     this.innerHTML = '';
-                    this.appendChild(content);
+                    this.appendChild(this.content);
                 },
             },
             dismissed: {
@@ -131,9 +129,34 @@
                     return this.dismiss === 'remember';
                 },
             },
+            setDismissButton: {
+                value: function () {
+                    var closeButton;
+                    if (this.undismissable) {
+                        closeButton = this.querySelector('.mkt-banner-close');
+                        this.content.removeChild(closeButton);
+                    } else {
+                        var self = this;
+                        closeButton = document.createElement('a');
+                        closeButton.classList.add('mkt-banner-close');
+                        closeButton.href = '#';
+                        closeButton.innerHTML = '&times;';
+                        closeButton.title = gettext('Close');
+                        closeButton.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            self.dismissBanner();
+                        });
+                        this.content.appendChild(closeButton);
+                    }
+                },
+            },
             storage: {
                 get: function () {
-                    return require('storage');
+                    if (window.require === undefined) {
+                        return localStorage;
+                    } else {
+                        return require('storage');
+                    }
                 },
             },
             storageKey: {

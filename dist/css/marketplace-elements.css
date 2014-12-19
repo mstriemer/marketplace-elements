@@ -60,18 +60,18 @@
   position: absolute;
   top: calc(50% - 11px);
 }
+.mkt-banner-content a {
+  background-color: #535353;
+}
+.mkt-banner-content a:hover {
+  background-color: #4b4b4b;
+}
 .mkt-banner-firefox .mkt-banner-content {
   background: url("../../img/logos/firefox-64.png") no-repeat;
   background-position: 0 50%;
   background-size: 64px 60px;
   min-height: 60px;
   padding: 0 40px 0 70px;
-}
-.mkt-banner-firefox a {
-  background-color: #535353;
-}
-.mkt-banner-firefox a:hover {
-  background-color: #4b4b4b;
 }
 .mkt-banner-success {
   background: #64be3c;
