@@ -11,17 +11,30 @@
 }
 .mkt-banner-content {
   margin: 2px auto;
-  max-width: $max-site-width;
+  max-width: 1070px;
   position: relative;
   text-align: center;
 }
-.mkt-banner-content .close {
-  margin: -17px 0 0 0;
-  top: 50%;
+.mkt-banner-content .mkt-banner-close,
+.mkt-banner-content .mkt-banner-close:hover,
+.mkt-banner-content .mkt-banner-close:active {
+  background: none;
 }
-.mkt-banner-content .close,
-.mkt-banner-content .close:hover {
-  background-color: transparent;
+.mkt-banner-content .mkt-banner-close {
+  color: #f1f1f1;
+  font-size: 30px;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 10px;
+  top: calc(50% - 15px);
+}
+.mkt-banner-content .mkt-banner-close:hover {
+  color: #f5f5f5;
+}
+.mkt-banner-content .mkt-banner-close:active {
+  color: #b5b5b5;
 }
 .mkt-banner-content span {
   display: inline-block;
@@ -151,7 +164,7 @@
     padding: 0;
   }
 }
-@media $narrower-than-desktop {
+@media (max-width: 709px) {
   .mkt-banner small {
     display: none;
   }

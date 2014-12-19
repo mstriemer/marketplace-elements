@@ -98,9 +98,9 @@
 
                     if (!this.undismissable) {
                         var closeButton = document.createElement('a');
-                        closeButton.classList.add('close');
+                        closeButton.classList.add('mkt-banner-close');
                         closeButton.href = '#';
-                        closeButton.textContent = '';
+                        closeButton.innerHTML = '&times;';
                         closeButton.title = gettext('Close');
                         closeButton.addEventListener('click', function (e) {
                             e.preventDefault();
