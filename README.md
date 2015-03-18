@@ -3,9 +3,9 @@ marketplace-elements
 
 Custom HTML elements for Firefox Marketplace.
 
-    make install
-    make
-    make serve
+    npm install
+    bower install
+    node serve.js
 
 [View Demo](http://mozilla.github.io/marketplace-elements/)
 

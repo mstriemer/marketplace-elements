@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/media/css/elements/segmented/segmented.css">
+        <script src="bower_components/document-register-element/build/document-register-element.max.js"></script>
+        <script src="/media/js/elements/segmented/segmented.js"></script>
+    </head>
+    <body>
+        <mkt-segmented name="numbers">
+            <select>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+            </select>
+        </mkt-segmented>
+
+        <div>Selected: <span id="selected-number"></span></div>
+        <script>
+var segmented = document.querySelector('[name=numbers]');
+var output = document.querySelector('#selected-number');
+segmented.addEventListener('change', function(e) {
+    output.textContent = segmented.value;
+});
+        </script>
+    </body>
+</html>
